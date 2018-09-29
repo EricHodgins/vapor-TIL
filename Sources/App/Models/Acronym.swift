@@ -1,6 +1,6 @@
 
 import Vapor
-import FluentSQLite
+import FluentPostgreSQL
 
 final class Acronym: Codable {
     var id: Int? // This is a must
@@ -21,7 +21,7 @@ final class Acronym: Codable {
 //}
 
 // Improve the above Model
-extension Acronym: SQLiteModel {}
+extension Acronym: PostgreSQLModel {}
 
 // TO save the model you must create a table for it. Fluent does this with Migration.
 extension Acronym: Migration {}
