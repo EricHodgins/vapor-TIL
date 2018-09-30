@@ -29,4 +29,4 @@ extension Acronym: Migration {}
 // Content - a wrapper around Codeable
 extension Acronym: Content {}
 
-extension Acronym: Parameter {}
+extension Acronym: Parameter {} // Powerful type safety to allow parameters as ID 
