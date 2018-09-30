@@ -28,3 +28,5 @@ extension Acronym: Migration {}
 
 // Content - a wrapper around Codeable
 extension Acronym: Content {}
+
+extension Acronym: Parameter {}
