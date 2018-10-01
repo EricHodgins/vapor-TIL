@@ -1,11 +1,8 @@
 // 1
 import FluentPostgreSQL
 import Vapor
-public func configure(
-    _ config: inout Config,
-    _ env: inout Environment,
-    _ services: inout Services
-    ) throws { // 2
+public func configure(_ config: inout Config, _ env: inout Environment, services: inout Services) throws {
+    // 2
     try services.register(FluentPostgreSQLProvider())
     let router = EngineRouter.default()
     try routes(router)
@@ -31,16 +28,14 @@ public func configure(
     let database = PostgreSQLDatabase(config: databaseConfig)
     databases.add(database: database, as: .psql)
     services.register(databases)
-//    let databaseConfig = PostgreSQLDatabaseConfig(
-//        hostname: "localhost",
-//        username: "vapor",
-//        database: "vapor",
-//        password: "password")
-//    let database = PostgreSQLDatabase(config: databaseConfig)
-//    databases.add(database: database, as: .psql)
-//    services.register(databases)
+
     var migrations = MigrationConfig()
     // 4
+    migrations.add(model: User.self, database: .psql)
     migrations.add(model: Acronym.self, database: .psql)
     services.register(migrations)
+    
+    var commandConfig = CommandConfig.default()
+    commandConfig.useFluentCommands()
+    services.register(commandConfig)
 }
